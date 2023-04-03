@@ -1,0 +1,32 @@
+[connection-to-source]
+type=ini
+path=default
+defaultSource=yes //manually
+needSort=yes
+paramSort1=a..b
+paramSort2=all //or only-sections
+[connection-to-source]
+type=winreg
+path=default
+
+[connection-to-source]
+type=db
+path=default
+defaultSource=no
+auth=auto
+authLogin=login
+authPass=Hash
+
+[main-window]
+windowSizeW=500
+windowSizeH=800
+
+[backpack-properties]
+backpackW=200
+backpackH=100
+backpackL=25
+
+[character-properties]
+age=30
+name=Nico
+city=Albany
