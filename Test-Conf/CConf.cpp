@@ -3,17 +3,17 @@
 #include <Windows.h>
 #include <filesystem>
 
-void CConf::Conf::AddSubSection(const CConf::CSection& masterSection, CConf::CSection slaveSection)
+void CConf::Conf::AddSubSection(CConf::CSection& masterSection, CConf::CSection slaveSection)
 {
 		std::vector<int> result;
 		std::string  slave = slaveSection.GetName();
 		std::string master = masterSection.GetName();
 		if (slave.find(master) == 0)
 		{
-			slave.erase(master.size()); //.Delete(0, master.GetLength());
+			//slave.erase(master.size());
 			if (slave.at(0)==m_separator)
 			{
-				slave.erase(0);//.Delete(0, 1);
+				slave.erase(0);
 			}
 		}
 		else if (master.find(slave) == 0)
@@ -26,13 +26,14 @@ void CConf::Conf::AddSubSection(const CConf::CSection& masterSection, CConf::CSe
 		master += slave;
 		if (isHadSeparator(fullname, m_separator))
 		{
-			//TODO: AddDependentSec(fullname);
+			//TODO: 
+			//AddDependentSec(fullname);
+			this->m_settings.at(masterSection.GetName()).AddSection(slaveSection);
 		}
 		else
 		{
 			slaveSection.SetName(fullname);
 			m_settings.emplace(fullname, slaveSection);
-	
 		}
 }
 

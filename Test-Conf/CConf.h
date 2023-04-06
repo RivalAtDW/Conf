@@ -99,7 +99,7 @@ namespace CConf
 		bool AddSection(const std::string name);
 
 		//создать подсекцию, например (main.form.tree, test.big) создаст секции main.form.tree.test main.form.tree.test.big, если их нет
-		void AddSubSection(const CSection& masterSection, CSection slaveSection);
+		void AddSubSection(CSection& masterSection, CSection slaveSection);
 		//проверить в конфиге наличие всех зависимых секций, если их нет - создать
 		void AddSubSection();
 		/// <summary>

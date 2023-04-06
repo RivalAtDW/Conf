@@ -282,7 +282,7 @@ void CConf::CSection::AddData(CData& value)
 	m_Data[value.GetName()] = value;
 }
 
-void CConf::CSection::AddSection(CSection& section)
+void CConf::CSection::AddSection(CSection& section) 
 {
 	m_sub[section.GetName()];
 	for (auto& item : section.m_Data)
@@ -291,7 +291,7 @@ void CConf::CSection::AddSection(CSection& section)
 	}
 }
 
-void CConf::CSection::AddSection(std::string name)
+void CConf::CSection::AddSection(std::string name) 
 {
 	auto constructSection = CSection(name);
 	AddSection(constructSection);

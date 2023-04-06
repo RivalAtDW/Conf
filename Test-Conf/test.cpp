@@ -92,11 +92,13 @@ TEST(TestMethod, TestConstructor) {
 		sec1.AddData(data2);
 		sec2.AddData(data1);
 		sec2.AddData(data2);
-		//auto cfg = CConf::Conf( { sec1, sec2 } );
-		//auto cfg2 = CConf::Conf(testCString1, { sec1, sec2 });
-		//cfg.AddSubSection(sec2, sec1);
-		//bool result = cfg.Size() == 4 ? true : false;
-		//EXPECT_TRUE(result==false);
+		auto cfg = CConf::Conf( { sec1, sec2 } );
+
+
+		auto cfg2 = cfg;
+		cfg.AddSubSection(sec2, sec1);
+		bool result = cfg.Size() == 4 ? true : false;
+		EXPECT_TRUE(result==false);
 	}
 	TEST(AddSubSection, test2)
 	{
