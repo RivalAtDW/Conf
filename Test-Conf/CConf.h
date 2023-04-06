@@ -140,15 +140,15 @@ namespace CConf
 		/// <param name="name">имя секции</param>
 		/// <returns>количество опций в указанной секции</returns>
 		size_t GetOptionsCount(const std::string name);
-
+		void AddDependentSec(std::string name);
 		private:
-			void AddOption(std::string section, std::string option, std::variant<bool, int, double, std::string> value);
+		void AddOption(std::string section, std::string option, std::variant<bool, int, double, std::string> value);
 
 		/// <summary>
 		/// Создает в конфиге зависимые секции. Например, AddDependentSec("test/test/test") должен добавить три секции
 		/// </summary>
 		/// <param name="name">имя с раздделителями</param>
-		void AddDependentSec(std::string name);
+
 		std::vector<std::string> GetDependedArray(std::vector<std::string> base) const;
 		std::vector<std::string> GetDependedArray(std::string name) const;
 		std::string GetOptionNameFrom(std::string name) const;

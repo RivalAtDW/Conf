@@ -106,14 +106,13 @@ TEST(TestMethod, TestConstructor) {
 		CData data2 = CData(testCString2, testCString2);
 		CConf::CSection sec1 = CConf::CSection(testCString1);
 		CConf::CSection sec2 = CConf::CSection(testCString2);
-		auto cfg = CConf::Conf({ sec2 });
-		int sizeOfCFG = cfg.Size();
-		//cfg.AddSubSection(sec2, sec1);
+		auto cfg = CConf::Conf({ sec2,sec1 });
+		sec1.AddSection(sec2);
+		cfg.AddDependentSec(sec2.GetName());
 		//_crtBreakAlloc = 1587;
 		try
 		{
-			EXPECT_TRUE(cfg.Size() == 15);
-			EXPECT_TRUE(sizeOfCFG == 15);
+			EXPECT_TRUE(cfg.Size() == 12);
 		}
 		catch (const std::exception&)
 		{
