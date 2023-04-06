@@ -1,7 +1,7 @@
 #pragma once
 #include "CData.h"
-#    define _AFXDLL
-#include <afxcoll.h>
+//#    define _AFXDLL
+//#include <afxcoll.h>
 #include <variant>
 #include <string>
 #include <vector>

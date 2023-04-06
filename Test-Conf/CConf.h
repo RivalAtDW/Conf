@@ -5,10 +5,11 @@
 #include <variant>
 #include <string>
 #    define OUT
-#    define _AFXDLL
+//#    define _AFXDLL
 #include <fstream>
-#include <afxcoll.h>
+//#include <afxcoll.h>
 #include <map>
+#include <atlbase.h>
 
 //специфичные контейнеры данных
 namespace CDataStorage
@@ -165,17 +166,18 @@ namespace CConf
   // }
 }
 
-static bool isDirectoryExists(CString path)
+static bool isDirectoryExists(std::string path)
 {
-	DWORD dwFileAttributes = GetFileAttributes( path);
+	LPCWSTR lp = (LPCWSTR)path.c_str();
+	DWORD dwFileAttributes = GetFileAttributes(lp);
 	if (dwFileAttributes == 0xFFFFFFFF)
 		return false;
 	return dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY;
 }
 
-static bool isFileExists(CString pathAndFile)
+static bool isFileExists(std::string pathAndFile)
 {
-	std::ifstream file(pathAndFile.GetString());
+	std::ifstream file(pathAndFile);
 	try
 	{
 		if (file)
@@ -191,8 +193,3 @@ static bool isFileExists(CString pathAndFile)
 	return false;
 }
 
-static bool isFileExists(const std::string& pathAndFile)
-{
-	CString result(pathAndFile.c_str());
-	return isFileExists(result);	
-}

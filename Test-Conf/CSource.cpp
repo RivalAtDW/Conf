@@ -5,7 +5,7 @@
 #include <sstream>
 
 using CConf::Conf;
-
+/*
 CConf::TemplateSource::~TemplateSource()
 {
 }
@@ -77,7 +77,7 @@ bool CConf::CSource::Init()
 }
 CConf::Conf CConf::CSource::Load(CConf::CSection* ConnectInfo)
 {
-	CString wantedSectionName(_T("[connection-to-source]"));
+	std::string wantedSectionName("[connection-to-source]");
 	CConf::Conf result;
 	auto enumType = std::visit(CData::make_type_functor(), ConnectInfo->GetData("Type").GetValue());
 	auto concreteType = static_cast<CConf::CSource::type>(enumType);
@@ -134,7 +134,7 @@ CConf::Conf CConf::CSource::Load(CConf::CSection* ConnectInfo)
 	return result;
 }
 
-CConf::CSource::implem::TXT::TXT(const CString path, const CString name)
+CConf::CSource::implem::TXT::TXT(const std::string path, const std::string name)
 {
 }
 
@@ -221,27 +221,27 @@ CConf::Conf CConf::CSource::implem::TXT::LoadConf(const CConf::CSection& SourceI
 	return CConf::Conf();
 }
 
-bool CConf::CSource::implem::TXT::AddSection(const CString NameOfSection, int CountOfParam)
+bool CConf::CSource::implem::TXT::AddSection(const std::string NameOfSection, int CountOfParam)
 {
 	return false;
 }
 
-bool CConf::CSource::implem::TXT::DelSection(const CString NameOfSection)
+bool CConf::CSource::implem::TXT::DelSection(const std::string NameOfSection)
 {
 	return false;
 }
 
-bool CConf::CSource::implem::TXT::AddParam(const CString NameOfSection, CString NameOfParam)
+bool CConf::CSource::implem::TXT::AddParam(const std::string NameOfSection, std::string NameOfParam)
 {
 	return false;
 }
 
-bool CConf::CSource::implem::TXT::DelParam(const CString NameOfSection, CString NameOfParam)
+bool CConf::CSource::implem::TXT::DelParam(const std::string NameOfSection, std::string NameOfParam)
 {
 	return false;
 }
 
-CConf::CSource::implem::JSON::JSON(CString path, CString name)
+CConf::CSource::implem::JSON::JSON(std::string path, std::string name)
 {
 }
 
@@ -257,27 +257,27 @@ CConf::Conf CConf::CSource::implem::JSON::LoadConf(const CConf::CSection& Source
 	return CConf::Conf();
 }
 
-bool CConf::CSource::implem::JSON::AddSection(const CString NameOfSection, int CountOfParam)
+bool CConf::CSource::implem::JSON::AddSection(const std::string NameOfSection, int CountOfParam)
 {
 	return false;
 }
 
-bool CConf::CSource::implem::JSON::DelSection(const CString NameOfSection)
+bool CConf::CSource::implem::JSON::DelSection(const std::string NameOfSection)
 {
 	return false;
 }
 
-bool CConf::CSource::implem::JSON::AddParam(const CString NameOfSection, CString NameOfParam)
+bool CConf::CSource::implem::JSON::AddParam(const std::string NameOfSection, std::string NameOfParam)
 {
 	return false;
 }
 
-bool CConf::CSource::implem::JSON::DelParam(const CString NameOfSection, CString NameOfParam)
+bool CConf::CSource::implem::JSON::DelParam(const std::string NameOfSection, std::string NameOfParam)
 {
 	return false;
 }
 
-CConf::CSource::implem::XML::XML(CString path, CString name)
+CConf::CSource::implem::XML::XML(std::string path, std::string name)
 {
 }
 
@@ -293,32 +293,32 @@ CConf::Conf CConf::CSource::implem::XML::LoadConf(const CConf::CSection& SourceI
 	return CConf::Conf();
 }
 
-bool CConf::CSource::implem::XML::AddSection(const CString NameOfSection, int CountOfParam)
+bool CConf::CSource::implem::XML::AddSection(const std::string NameOfSection, int CountOfParam)
 {
 	return false;
 }
 
-bool CConf::CSource::implem::XML::DelSection(const CString NameOfSection)
+bool CConf::CSource::implem::XML::DelSection(const std::string NameOfSection)
 {
 	return false;
 }
 
-bool CConf::CSource::implem::XML::AddParam(const CString NameOfSection, CString NameOfParam)
+bool CConf::CSource::implem::XML::AddParam(const std::string NameOfSection, std::string NameOfParam)
 {
 	return false;
 }
 
-bool CConf::CSource::implem::XML::DelParam(const CString NameOfSection, CString NameOfParam)
+bool CConf::CSource::implem::XML::DelParam(const std::string NameOfSection, std::string NameOfParam)
 {
 	return false;
 }
 
-bool CConf::CSource::implem::DB::DelParam(const CString NameOfSection, CString NameOfParam)
+bool CConf::CSource::implem::DB::DelParam(const std::string NameOfSection, std::string NameOfParam)
 {
 	return false;
 }
 
-CConf::CSource::implem::WINREG::WINREG(CString path, CString name)
+CConf::CSource::implem::WINREG::WINREG(std::string path, std::string name)
 {
 }
 
@@ -333,27 +333,27 @@ CConf::Conf CConf::CSource::implem::WINREG::LoadConf(const CConf::CSection& Sour
 	return CConf::Conf();
 }
 
-bool CConf::CSource::implem::WINREG::AddSection(const CString NameOfSection, int CountOfParam)
+bool CConf::CSource::implem::WINREG::AddSection(const std::string NameOfSection, int CountOfParam)
 {
 	return false;
 }
 
-bool CConf::CSource::implem::WINREG::DelSection(const CString NameOfSection)
+bool CConf::CSource::implem::WINREG::DelSection(const std::string NameOfSection)
 {
 	return false;
 }
 
-bool CConf::CSource::implem::WINREG::AddParam(const CString NameOfSection, CString NameOfParam)
+bool CConf::CSource::implem::WINREG::AddParam(const std::string NameOfSection, std::string NameOfParam)
 {
 	return false;
 }
 
-bool CConf::CSource::implem::WINREG::DelParam(const CString NameOfSection, CString NameOfParam)
+bool CConf::CSource::implem::WINREG::DelParam(const std::string NameOfSection, std::string NameOfParam)
 {
 	return false;
 }
 
-CConf::CSource::implem::INI::INI(CString path, CString name)
+CConf::CSource::implem::INI::INI(std::string path, std::string name)
 {
 }
 
@@ -369,27 +369,27 @@ CConf::Conf CConf::CSource::implem::INI::LoadConf(const CConf::CSection& SourceI
 	return CConf::Conf();
 }
 
-bool CConf::CSource::implem::INI::AddSection(const CString NameOfSection, int CountOfParam)
+bool CConf::CSource::implem::INI::AddSection(const std::string NameOfSection, int CountOfParam)
 {
 	return false;
 }
 
-bool CConf::CSource::implem::INI::DelSection(const CString NameOfSection)
+bool CConf::CSource::implem::INI::DelSection(const std::string NameOfSection)
 {
 	return false;
 }
 
-bool CConf::CSource::implem::INI::AddParam(const CString NameOfSection, CString NameOfParam)
+bool CConf::CSource::implem::INI::AddParam(const std::string NameOfSection, std::string NameOfParam)
 {
 	return false;
 }
 
-bool CConf::CSource::implem::INI::DelParam(const CString NameOfSection, CString NameOfParam)
+bool CConf::CSource::implem::INI::DelParam(const std::string NameOfSection, std::string NameOfParam)
 {
 	return false;
 }
 
-CConf::CSource::implem::DB::DB(CString server, CString db)
+CConf::CSource::implem::DB::DB(std::string server, std::string db)
 {
 }
 
@@ -405,27 +405,26 @@ CConf::Conf CConf::CSource::implem::DB::LoadConf(const CConf::CSection& SourceIn
 	return CConf::Conf();
 }
 
-bool CConf::CSource::implem::DB::AddSection(const CString NameOfSection, int CountOfParam)
+bool CConf::CSource::implem::DB::AddSection(const std::string NameOfSection, int CountOfParam)
 {
 	return false;
 }
 
-bool CConf::CSource::implem::DB::DelSection(const CString NameOfSection)
+bool CConf::CSource::implem::DB::DelSection(const std::string NameOfSection)
 {
 	return false;
 }
 
-bool CConf::CSource::implem::DB::AddParam(const CString NameOfSection, CString NameOfParam)
+bool CConf::CSource::implem::DB::AddParam(const std::string NameOfSection, std::string NameOfParam)
 {
 	return false;
 }
 //static 
 bool CConf::CSource::TXTisSectionName(std::string name)
 {
-	unsigned char separator1 = '[';
-	unsigned char separator2 = ']';
-	CString temp = name.c_str();
-	if (temp.Find(separator1,0)==0&& temp.Find(separator2, 0)== (temp.GetLength()-1))
+	char separator1 = '[';
+	char separator2 = ']';
+	if (name.find(separator1)==0&& name.find(separator2)== (name.size() - 1))
 	{
 		return true;
 	}
@@ -435,7 +434,7 @@ bool CConf::CSource::TXTisSectionName(std::string name)
 
 bool CConf::CSource::TXTisOption(std::string name)
 {
-	unsigned char separator1 = '=';
+	char separator1 = '=';
 	if (CConf::Conf::isHadSeparator(name, separator1))
 	{
 		return true;
@@ -443,3 +442,4 @@ bool CConf::CSource::TXTisOption(std::string name)
 
 	return false;
 }
+*/

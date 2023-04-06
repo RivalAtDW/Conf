@@ -1,6 +1,6 @@
 #pragma once
-#    define _AFXDLL
-#include <afxcoll.h>
+#    define OUT
+//#include <afxcoll.h>
 #include <variant>
 #include <string>
 #include <vector>
@@ -34,8 +34,8 @@ public:
 	static bool isHadSeparator(std::string name, unsigned char separator);
 	static bool FindSeparator(std::string name, unsigned char& separator);
 	virtual bool HasEntry(const std::string name) const = 0;
-	static std::string ToSTL(CString value);
-	static CString  ToMFC(std::string value);
+	//static std::string ToSTL(CString value);
+	//static CString  ToMFC(std::string value);
 	static std::string GetOptionNameFrom(std::string name, unsigned char separator);
 protected:
 	std::string m_name="Default";

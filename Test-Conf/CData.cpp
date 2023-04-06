@@ -180,7 +180,7 @@ bool base::ContainChar(wchar_t char4find, std::vector<wchar_t> arrayChar)
 	}
 	return false;
 }
-
+/*
 std::string base::ToSTL(CString value)
 {
 	CT2CA transform(value);
@@ -193,7 +193,7 @@ CString base::ToMFC(std::string value)
 	CString transform(value.c_str());
 	return transform;
 }
-
+*/
 //static
 std::string base::GetOptionNameFrom(std::string name, unsigned char separator)
 {

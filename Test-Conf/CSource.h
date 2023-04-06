@@ -1,12 +1,12 @@
 #pragma once
-#    define _AFXDLL
+//#    define _AFXDLL
 #include "CConf.h"
-#include <afxcoll.h>
+//#include <afxcoll.h>
 #include <variant>
 #include <string>
 #include <fstream>
 #    define OUT
-
+/*
 namespace CConf
 {
 	//виртуальный базовый класс дл€ определени€ структуры производных
@@ -19,7 +19,7 @@ namespace CConf
 		
 		//производный класс должен переопределить эту функцию
 		//должен вернуть двумерный массив с настройками из ресурса
-		//virtual std::vector<std::vector<CString>> ConfLoad();// const = 0;
+		//virtual std::vector<std::vector<std::string>> ConfLoad();// const = 0;
 		//сохран€ет данные в ресурс в зависимости от типа ctype
 		//если указано место, класс провер€ет, есть ли в настройках настройки дл€ подключени€ \ путь реестра
 		//иначе - пытаетс€ подключитьс€ к месту с настройками по умолчанию 
@@ -28,14 +28,14 @@ namespace CConf
 		virtual bool SaveConf(const CSection& SourceInfo);// = 0;
 		//load from source
 		virtual CConf::Conf LoadConf(const CSection& SourceInfo);// = 0;
-		virtual bool AddSection(const CString NameOfSection, int CountOfParam) = 0;
-		virtual bool DelSection(const CString NameOfSection) = 0;
-		virtual bool AddParam(const CString NameOfSection, CString  NameOfParam) = 0;
-		virtual bool DelParam(const CString NameOfSection, CString  NameOfParam) = 0;
+		virtual bool AddSection(const std::string NameOfSection, int CountOfParam) = 0;
+		virtual bool DelSection(const std::string NameOfSection) = 0;
+		virtual bool AddParam(const std::string NameOfSection, std::string  NameOfParam) = 0;
+		virtual bool DelParam(const std::string NameOfSection, std::string  NameOfParam) = 0;
 
 	private:
 		//хранит текстовые статусы - [найден конфиг такой-то, не найдено ничего нигде]
-		std::vector<CString> m_state;
+		std::vector<std::string> m_state;
 	};
 	
 	class CSource
@@ -54,15 +54,15 @@ namespace CConf
 			public:
 
 				TXT() :TemplateSource() { };
-				TXT(const CString path, const CString name);
+				TXT(const std::string path, const std::string name);
 				explicit TXT(const CConf::CSection& SettingsOfConnectToSource);
 
 				bool SaveConf(const CConf::CSection& SourceInfo) override;
 				CConf::Conf LoadConf(const CConf::CSection& SourceInfo) override; 
-				bool AddSection(const CString NameOfSection, int CountOfParam) override;
-				bool DelSection(const CString NameOfSection) override;
-				bool AddParam(const CString NameOfSection, CString NameOfParam) override;
-				bool DelParam(const CString NameOfSection, CString NameOfParam) override;
+				bool AddSection(const std::string NameOfSection, int CountOfParam) override;
+				bool DelSection(const std::string NameOfSection) override;
+				bool AddParam(const std::string NameOfSection, std::string NameOfParam) override;
+				bool DelParam(const std::string NameOfSection, std::string NameOfParam) override;
 
 			private:
 				unsigned char m_optionSep = '=';
@@ -73,67 +73,67 @@ namespace CConf
 			{
 			public:
 				JSON() = default;
-				JSON(CString path, CString name);
+				JSON(std::string path, std::string name);
 
 				bool SaveConf(const CConf::CSection& SourceInfo) override;
 				CConf::Conf LoadConf(const CConf::CSection& SourceInfo) override;
-				bool AddSection(const CString NameOfSection, int CountOfParam) override;
-				bool DelSection(const CString NameOfSection) override;
-				bool AddParam(const CString NameOfSection, CString NameOfParam) override;
-				bool DelParam(const CString NameOfSection, CString NameOfParam) override;
+				bool AddSection(const std::string NameOfSection, int CountOfParam) override;
+				bool DelSection(const std::string NameOfSection) override;
+				bool AddParam(const std::string NameOfSection, std::string NameOfParam) override;
+				bool DelParam(const std::string NameOfSection, std::string NameOfParam) override;
 			};
 			class XML : public TemplateSource
 			{
 			public:
 				XML() = default;
-				XML(CString path, CString name);
+				XML(std::string path, std::string name);
 
 				bool SaveConf(const CConf::CSection& SourceInfo) override;
 				CConf::Conf LoadConf(const CConf::CSection& SourceInfo) override;
-				bool AddSection(const CString NameOfSection, int CountOfParam) override;
-				bool DelSection(const CString NameOfSection) override;
-				bool AddParam(const CString NameOfSection, CString NameOfParam) override;
-				bool DelParam(const CString NameOfSection, CString NameOfParam) override;
+				bool AddSection(const std::string NameOfSection, int CountOfParam) override;
+				bool DelSection(const std::string NameOfSection) override;
+				bool AddParam(const std::string NameOfSection, std::string NameOfParam) override;
+				bool DelParam(const std::string NameOfSection, std::string NameOfParam) override;
 			};
 			class WINREG : public TemplateSource
 			{
 			public:
 				WINREG() = default;
-				WINREG(CString path, CString name);
+				WINREG(std::string path, std::string name);
 
 				bool SaveConf(const CConf::CSection& SourceInfo) override;
 				CConf::Conf LoadConf(const CConf::CSection& SourceInfo) override;
-				bool AddSection(const CString NameOfSection, int CountOfParam) override;
-				bool DelSection(const CString NameOfSection) override;
-				bool AddParam(const CString NameOfSection, CString NameOfParam) override;
-				bool DelParam(const CString NameOfSection, CString NameOfParam) override;
+				bool AddSection(const std::string NameOfSection, int CountOfParam) override;
+				bool DelSection(const std::string NameOfSection) override;
+				bool AddParam(const std::string NameOfSection, std::string NameOfParam) override;
+				bool DelParam(const std::string NameOfSection, std::string NameOfParam) override;
 			};
 			class INI : public TemplateSource
 			{
 			public:
 				INI() = default;
-				INI(CString path, CString name);
+				INI(std::string path, std::string name);
 
 				bool SaveConf(const CConf::CSection& SourceInfo) override;
 				CConf::Conf LoadConf(const CConf::CSection& SourceInfo) override;
-				bool AddSection(const CString NameOfSection, int CountOfParam) override;
-				bool DelSection(const CString NameOfSection) override;
-				bool AddParam(const CString NameOfSection, CString NameOfParam) override;
-				bool DelParam(const CString NameOfSection, CString NameOfParam) override;
+				bool AddSection(const std::string NameOfSection, int CountOfParam) override;
+				bool DelSection(const std::string NameOfSection) override;
+				bool AddParam(const std::string NameOfSection, std::string NameOfParam) override;
+				bool DelParam(const std::string NameOfSection, std::string NameOfParam) override;
 			};
 			class DB : public TemplateSource
 			{
 			public:
 				DB() = default;
-				DB(CString server, CString db);
-				DB(CString server, CString db, CString login, CString pass);
+				DB(std::string server, std::string db);
+				DB(std::string server, std::string db, std::string login, std::string pass);
 
 				bool SaveConf(const CConf::CSection& SourceInfo) override;
 				CConf::Conf LoadConf(const CConf::CSection& SourceInfo) override;
-				bool AddSection(const CString NameOfSection, int CountOfParam) override;
-				bool DelSection(const CString NameOfSection) override;
-				bool AddParam(const CString NameOfSection, CString NameOfParam) override;
-				bool DelParam(const CString NameOfSection, CString NameOfParam) override;
+				bool AddSection(const std::string NameOfSection, int CountOfParam) override;
+				bool DelSection(const std::string NameOfSection) override;
+				bool AddParam(const std::string NameOfSection, std::string NameOfParam) override;
+				bool DelParam(const std::string NameOfSection, std::string NameOfParam) override;
 			};
 
 		};
@@ -187,3 +187,4 @@ namespace CConf
 		CConf::CSection m_error;
 	};
 }
+*/

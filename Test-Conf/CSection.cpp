@@ -103,9 +103,10 @@ bool CConf::CSection::Read(std::string from, OUT bool& where)
 
 				return true;
 			}
-			CString buf= static_cast<wchar_t>(m_separator);
+			std::string buf;
+			buf+=(m_separator);
 			buf = this->GetName().c_str() + buf;
-			from = ToSTL(buf) + from;
+			from = buf + from;
 		}
 		if (this->Contain(from))
 		{
@@ -144,9 +145,10 @@ bool CConf::CSection::Read(std::string from, OUT int& where)
 				where = atoi(res.c_str());
 				return true;
 			}
-			CString buf = static_cast<wchar_t>(m_separator);
+			std::string buf;
+			buf += (m_separator);
 			buf = this->GetName().c_str() + buf;
-			from = ToSTL(buf) + from;
+			from = buf + from;
 		}
 
 		if (this->Contain(from))
@@ -179,9 +181,10 @@ bool CConf::CSection::Read(std::string from, OUT double& where)
 				where = atof(res.c_str());
 				return true;
 			}
-			CString buf = static_cast<wchar_t>(m_separator);
+			std::string buf;
+			buf += (m_separator);
 			buf = this->GetName().c_str() + buf;
-			from = ToSTL(buf) + from;
+			from = buf + from;
 		}
 		if (this->Contain(from))
 		{
@@ -212,9 +215,10 @@ bool CConf::CSection::Read(std::string from, OUT std::string& where)
 				where = res.c_str();
 				return true;
 			}
-			CString buf = static_cast<wchar_t>(m_separator);
+			std::string buf;
+			buf += (m_separator);
 			buf = this->GetName().c_str() + buf;
-			from = ToSTL(buf) + from;
+			from = buf + from;
 		}
 		if (this->Contain(from))
 		{
