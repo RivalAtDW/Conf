@@ -5,7 +5,7 @@
 #include <sstream>
 
 using CConf::Conf;
-/*
+
 CConf::TemplateSource::~TemplateSource()
 {
 }
@@ -442,4 +442,3 @@ bool CConf::CSource::TXTisOption(std::string name)
 
 	return false;
 }
-*/

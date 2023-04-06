@@ -427,9 +427,9 @@ TEST(TestMethod, TestConstructor) {
 
 
 
-		//CConf::CSource Source1;
-		//auto * ref= cfg.GetSection(secName);
- 		//auto result=Source1.Load(ref);
+		CConf::CSource Source1;
+		auto * ref= cfg.GetSection(secName);
+ 		auto result=Source1.Load(ref);
 
 
 
@@ -438,9 +438,9 @@ TEST(TestMethod, TestConstructor) {
 		// 
 		// 
 		// 
-		//auto Res = result.Size();
-		//auto booleanResult = Res == 4;
-		//EXPECT_EQ(booleanResult, true);
+		auto Res = result.Size();
+		auto booleanResult = Res == 4;
+		EXPECT_EQ(booleanResult, true);
 	}
 	
 

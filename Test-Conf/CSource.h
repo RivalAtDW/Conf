@@ -6,7 +6,7 @@
 #include <string>
 #include <fstream>
 #    define OUT
-/*
+
 namespace CConf
 {
 	//виртуальный базовый класс для определения структуры производных
@@ -187,4 +187,3 @@ namespace CConf
 		CConf::CSection m_error;
 	};
 }
-*/
