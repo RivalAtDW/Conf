@@ -61,7 +61,7 @@ namespace CConf
 		//содержит ли дополнительная карта с секциями какой-либо объект с таким именем
 		bool ContainExt(const std::string nameOfCData) const;
 		static bool Contain(CSection& src, const std::string nameOfCData);
-
+		bool isHadSubSect();
 		size_t GetOptionsCount() const;
 		void Empty();
 		bool HasEntry(const std::string name) const override;

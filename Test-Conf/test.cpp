@@ -97,8 +97,8 @@ TEST(TestMethod, TestConstructor) {
 
 		auto cfg2 = cfg;
 		cfg.AddSubSection(sec2, sec1);
-		bool result = cfg.Size() == 4 ? true : false;
-		EXPECT_TRUE(result==false);
+		auto* pSect = cfg.GetSection(std::string(sec2.GetName()));
+		EXPECT_TRUE(pSect->isHadSubSect());
 	}
 	TEST(AddSubSection, test2)
 	{

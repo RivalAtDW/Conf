@@ -60,6 +60,11 @@ bool CConf::CSection::Contain(CSection& src, const std::string nameOfData)
 	return false;
 }
 
+bool CConf::CSection::isHadSubSect()
+{
+	return m_sub.size() == 0 ? false : true;
+}
+
 size_t CConf::CSection::GetOptionsCount() const
 {
 	return m_Data.size();
