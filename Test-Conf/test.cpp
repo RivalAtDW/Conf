@@ -161,6 +161,12 @@ TEST(TestMethod, TestConstructor) {
 		sec2.AddSection(sec4);
 
 		EXPECT_TRUE(sec2.GetOptionsCount()==1&& sec2.GetSectCount()==4);
+
+		auto subSect=sec2.GetSubSection("Main.MasterFrame.TESTPosition");
+		CConf::CSection sec5 = sec2;
+		EXPECT_TRUE(subSect == sec1);
+		EXPECT_TRUE(sec5 == sec2);
+
 	}
 
 	TEST(Constructor, SectionGet)

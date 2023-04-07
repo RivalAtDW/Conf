@@ -19,8 +19,8 @@ bool CConf::CSection::Contain(const std::string nameOfData) const
 {
 	if (isHadSeparator(nameOfData, m_separator)) 
 	{
-		auto temp = base::GetOptionNameFrom(nameOfData, m_separator);
-		if (m_Data.contains(temp)) {
+		//auto temp = base::GetOptionNameFrom(nameOfData, m_separator);
+		if (m_Data.contains(nameOfData)) {
 			return true;
 		};
 	
@@ -80,7 +80,7 @@ void CConf::CSection::Empty()
 
 bool CConf::CSection::HasEntry(const std::string name) const
 {
-	if (m_Data.contains(name))
+	if (m_Data.contains(name)||m_sub.contains(name))
 	{
 		return true;
 	}
@@ -261,7 +261,7 @@ void CConf::CSection::SetTypeOfValue(std::string name, CData::TOtype type)
 CConf::CSection CConf::CSection::GetSubSection(std::string name)
 {
 	CConf::CSection res;
-	if (Contain(name))
+	if (HasEntry(name))
 	{
 		auto what = m_sub.at(name);
 		res.SetName(name);
@@ -300,4 +300,26 @@ void CConf::CSection::AddSection(std::string name)
 {
 	auto constructSection = CSection(name);
 	AddSection(constructSection);
+}
+
+bool CConf::operator==(const CSection& rhs, const CSection& lhs)
+{
+	if (rhs.GetName()== lhs.GetName()&& rhs.GetSectCount() == lhs.GetSectCount()) 
+	{
+		for (auto it1 = rhs.m_Data.begin(), it2 = lhs.m_Data.begin(); it1 != rhs.m_Data.end(); ++it1, ++it2){
+			if (it1->second != it2->second)
+				return false;
+		}
+		if (rhs.GetSectCount() != 0) {
+			for (auto it1 = rhs.m_sub.begin(), it2 = lhs.m_sub.begin(); it1 != rhs.m_sub.end(); ++it1, ++it2) {
+				if (it1->second != it2->second)
+					return false;
+			}
+
+
+		}
+		return true;
+	}
+	// TODO: вставьте здесь оператор return
+	return false;
 }

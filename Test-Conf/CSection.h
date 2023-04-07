@@ -71,7 +71,7 @@ namespace CConf
 		bool Read(std::string from, OUT std::string& where);
 		size_t GetSectCount() const;
 		size_t size() const;
-		
+		friend bool operator== (const CSection& rhs, const CSection& lhs);
 	private:
 		void SetTypeOfValue(std::string name, CData::TOtype type);
 		std::map<std::string, CData>  m_Data;

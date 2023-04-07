@@ -81,14 +81,6 @@ public:
 	friend std::ostream& operator<< (std::ostream& out, const CData& source);
 	struct make_string_functor
 	{
-		//std::basic_string<TCHAR>
-		/*std::string operator()(const CString x) const {
-			// Convert a TCHAR string to a LPCSTR
-			CT2CA pszConvertedAnsiString(x);
-			// construct a std::string using the LPCSTR input
-			std::string strStd(pszConvertedAnsiString);
-			return strStd;
-		}*/
 		std::string operator()(int x) const { return std::to_string(x); }
 		std::string operator()(bool x) const {
 			std::string res;
