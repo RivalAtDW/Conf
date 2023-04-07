@@ -98,7 +98,9 @@ TEST(TestMethod, TestConstructor) {
 		auto cfg2 = cfg;
 		cfg.AddSubSection(sec2, sec1);
 		auto* pSect = cfg.GetSection(std::string(sec2.GetName()));
+		auto* pSect2 = cfg.GetSection(std::string(sec1.GetName()));
 		EXPECT_TRUE(pSect->isHadSubSect());
+		EXPECT_FALSE(pSect2->isHadSubSect());
 	}
 	TEST(AddSubSection, test2)
 	{
@@ -133,10 +135,10 @@ TEST(TestMethod, TestConstructor) {
 		CData data2 = CData(testCString2, testCString2);
 		CConf::CSection sec1 = CConf::CSection(testCString1);
 		CConf::CSection sec2 = CConf::CSection(testCString2);
-		//auto cfg = CConf::Conf({ sec1.GetName(), sec1 }, { sec2.GetName(), sec2 });
-		//auto cfg = CConf::Conf(
-		//cfg.AddSubSection(sec2, sec1);
-		//EXPECT_TRUE(cfg.Size() == 7);
+		auto cfg = CConf::Conf({ sec1, sec2 });
+		cfg.AddDependentSec(sec2.GetName());
+		cfg.AddDependentSec(sec1.GetName());
+		EXPECT_TRUE(cfg.Size() == 7);
 	}
 	
 	TEST(Constructor, SectionAddSection)
