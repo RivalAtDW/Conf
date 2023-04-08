@@ -7,6 +7,23 @@
 #include <vector>
 #define UNVALID_SECTION CConf::CSection("____unvalid_section_except")
 #define DEFAULT_DATA CData(std::string("____default_section"))
+
+
+#ifdef _EXPORTING
+#define CSECTION    __declspec(dllexport)
+#else
+#define CSECTION    __declspec(dllimport)
+#endif
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+	extern __declspec(dllexport) void* __stdcall CreateSection();
+	extern __declspec(dllexport) void __stdcall DestroySection(void* objptr);
+#ifdef __cplusplus
+}
+#endif
 namespace CConf
 {
 	struct SPosition
@@ -14,7 +31,7 @@ namespace CConf
 		size_t x = 0;
 		size_t y = 0;
 	};
-	class CSection : public base
+	class CSECTION CSection : public base
 	{
 	public:
 		friend class Conf;

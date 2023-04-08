@@ -11,6 +11,29 @@
 #include <map>
 #include <atlbase.h>
 
+
+
+#ifdef _EXPORTING
+#define CCONF    __declspec(dllexport)
+#else
+#define CCONF    __declspec(dllimport)
+#endif
+
+//#else
+//#pragma message("automatic link to CONF.LIB")
+//#pragma comment(lib, "CONF.lib")
+//#define CCONF __declspec(dllimport)
+
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+	extern __declspec(dllexport) void* __stdcall CreateConf();
+	extern __declspec(dllexport) void __stdcall DestroyConf(void* objptr);
+#ifdef __cplusplus
+}
+#endif
 //специфичные контейнеры данных
 namespace CDataStorage
 {
@@ -41,7 +64,8 @@ namespace CDataStorage
 
 namespace CConf
 {
-	class Conf : public base
+	//__declspec(dllexport)
+	class CCONF Conf : public base
 	{
 	public:	
 		friend class CSource;
@@ -158,7 +182,7 @@ namespace CConf
 		CConf::CSection m_error;
 		
 	};
-	static std::unique_ptr<CConf::Conf>  CreateConf();
+	//static std::unique_ptr<CConf::Conf>  CreateConf();
 	//вы€снить какой символ используетс€ дл€ разделител€
    //поиск опции в любом производном типе ресурса 
   // static double Load([[maybe_unused]] TemplateSource* src, [[maybe_unused]] std::string name) {

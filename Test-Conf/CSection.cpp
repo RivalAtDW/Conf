@@ -53,7 +53,7 @@ bool CConf::CSection::Contain(CSection& src, const std::string nameOfData)
 			return true;
 		};
 	}
-	catch (const std::exception& a)
+	catch (...)
 	{
 	}
 	
@@ -322,4 +322,16 @@ bool CConf::operator==(const CSection& rhs, const CSection& lhs)
 	}
 	// TODO: вставьте здесь оператор return
 	return false;
+}
+
+void* __stdcall CreateSection()
+{
+	return new CConf::CSection;
+}
+
+void __stdcall DestroySection(void* objptr)
+{
+	CConf::CSection* obj = (CConf::CSection*)objptr;
+	if (obj)
+		delete obj;
 }

@@ -1,7 +1,26 @@
 #include "pch.h"
-#include "CConf.h"
 #include <Windows.h>
 #include <filesystem>
+
+#define CCONF __declspec( dllexport )
+#include "CConf.h"
+
+BOOL APIENTRY DllMain(HANDLE /*hModule*/,
+	DWORD  ul_reason_for_call,
+	LPVOID /*lpReserved*/
+)
+{
+	switch (ul_reason_for_call)
+	{
+	case DLL_PROCESS_ATTACH:
+	case DLL_THREAD_ATTACH:
+	case DLL_THREAD_DETACH:
+	case DLL_PROCESS_DETACH:
+		break;
+	}
+	return TRUE;
+}
+
 
 void CConf::Conf::AddSubSection(CConf::CSection& masterSection, CConf::CSection slaveSection)
 {
@@ -504,11 +523,23 @@ std::string CConf::Conf::GetSectionNameFrom(std::string name) const
 }
 
 //static 
-
+/*
 std::unique_ptr<CConf::Conf> CConf::CreateConf()
 {
 	auto conf = std::make_unique<CConf::Conf>();
 	conf->AddSection(CConf::CSection("Window"));
 	conf->AddSection(CConf::CSection("Source"));
 	return conf;
+}*/
+
+void* __stdcall CreateConf()
+{
+	return new CConf::Conf;
+}
+
+void __stdcall DestroyConf(void* objptr)
+{
+	CConf::Conf* cfg = (CConf::Conf*)objptr;
+	if (cfg)
+		delete cfg;
 }

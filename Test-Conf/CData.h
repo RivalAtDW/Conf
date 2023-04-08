@@ -6,23 +6,33 @@
 #include <vector>
 #include <map>
 #include <variant>
+
+
+#ifdef _EXPORTING
+#define BASE    __declspec(dllexport)
+#else
+#define BASE    __declspec(dllimport)
+#endif
+
+
+
 class base
 {
 public:
-	base() = default;
+	BASE base() = default;
 
-	explicit base(std::string name) :m_name{ name.c_str() } {};
+	BASE explicit base(std::string name) :m_name{ name.c_str() } {};
 	//explicit base(const wchar_t name) :m_name{ name } {};
-	virtual ~base() = default;
-	virtual std::string GetName() const;
-	virtual void SetName(std::string name);
+	BASE virtual ~base() = default;
+	BASE virtual std::string GetName() const;
+	BASE virtual void SetName(std::string name);
 	/// <summary>
 	///Проводит поиск в m_name на предмет наличия separator.
 	/// true, если есть хотя бы один разделитель, не находящийся на нулевом индексе
 	/// </summary>
 	///
 	///<returns>разделитель(если FindSeparator()) и вектор позиций этого символа в строке</returns> 
-	bool FindSeparator(OUT unsigned char& separator) const;
+	BASE bool FindSeparator(OUT unsigned char& separator) const;
 	/// <summary>
 	/// поиск separator в любой строке, указанной пользователем
 	/// </summary>
@@ -38,7 +48,7 @@ public:
 	//static CString  ToMFC(std::string value);
 	static std::string GetOptionNameFrom(std::string name, unsigned char separator);
 protected:
-	std::string m_name="Default";
+	std::string  m_name="Default";
 	unsigned char m_separator = '.';
 	//метод проводит поиск уникальных символов в переданном массиве, затем ищет и выводит самый часто используемый 
 	//подразумевается использование в FindSeparator
@@ -52,33 +62,33 @@ protected:
 class CData : public base
 {
 public:
-	CData(void) : base(), m_value{ false }{};
-	CData(std::string Name) : base(Name), m_value{ false }{};
-	CData(std::string Name, const std::variant<bool, int, double, std::string>& Value) : base(Name), m_value{ Value }{ };
+	BASE CData(void) : base(), m_value{ false }{};
+	BASE CData(std::string Name) : base(Name), m_value{ false }{};
+	BASE CData(std::string Name, const std::variant<bool, int, double, std::string>& Value) : base(Name), m_value{ Value }{ };
 
 public:
 	enum class TOtype : int8_t
 	{
 		BOOL = 1, INT, DOUBLE, STRING, BYTE, BYTE8, CORRUPT
 	};
-	std::string GetName() const;
-	std::variant<bool, int, double,std::string> GetValue() const;
-	CData GetData() const;
-	unsigned char GetSeparator();
-	static void Copy(const CData& src, CData& dst);
-	static void Swap(CData& src, CData& dst);
+	BASE std::string GetName() const;
+	BASE std::variant<bool, int, double,std::string> GetValue() const;
+	BASE CData GetData() const;
+	BASE unsigned char GetSeparator();
+	BASE static void Copy(const CData& src, CData& dst);
+	BASE static void Swap(CData& src, CData& dst);
 	//установить в существующую где-то переменную данные по ссылке
 	//установить в хранилище данные по ссылке
-	void SetData(CData& src);
+	BASE void SetData(CData& src);
 	//установить в хранилище данные по ссылке
-	void SetData(std::string name, std::variant<bool, int, double,std::string>& value);
-	void SetValue(CData::TOtype type);
-	void SetData(std::variant<bool, int, double, std::string>& value);
-	void SetSeparator(unsigned char value);
+	BASE void SetData(std::string name, std::variant<bool, int, double,std::string>& value);
+	BASE void SetValue(CData::TOtype type);
+	BASE void SetData(std::variant<bool, int, double, std::string>& value);
+	BASE void SetSeparator(unsigned char value);
 
-	bool HasEntry(const std::string name) const override { return false; };
-	TOtype ViewTypeOfValue() const;
-	friend std::ostream& operator<< (std::ostream& out, const CData& source);
+	BASE bool HasEntry(const std::string name) const override { return false; };
+	BASE TOtype ViewTypeOfValue() const;
+	BASE friend std::ostream& operator<< (std::ostream& out, const CData& source);
 	struct make_string_functor
 	{
 		std::string operator()(int x) const { return std::to_string(x); }

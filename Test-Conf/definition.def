@@ -1,0 +1,8 @@
+;  defines the exports for .dll
+
+LIBRARY CONF
+DESCRIPTION 'A C++ dll that can be called from VB'
+
+EXPORTS
+    CreateConf
+    DestroyConf
